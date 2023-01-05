@@ -1,0 +1,100 @@
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ddd;
+}
+
+header {
+    padding: 20px 0;
+    background-color: #005a9c;
+    border-bottom: 3px solid #f00;
+}
+
+h1 {
+    color: #fdfdfd;
+}
+
+#gameSection {
+    margin: 20px auto;
+    padding: 10px;
+    width: 80%;
+    height: 450px;
+    background: #fdfdfd;
+    border: 3px solid #000;
+    border-radius: 5px;
+}
+
+.red-text {
+    color: red;
+}
+
+.blue-text {
+    color: #005a9c;
+}
+
+.green-text {
+    color: green;
+}
+
+.purple-text {
+    color: purple;
+}
+
+.gold-text {
+    color: gold;
+}
+
+.cube-section {
+    display: flex;
+    justify-content: space-around;
+    /* margin: 10px; */
+    /* height: 70px;   */
+}
+
+.cube {
+    margin-right: 30px;
+    width: 70px;
+    height: 70px;
+    box-shadow: 2px 2px 2px #aaa;
+}
+
+.red {
+    background-color: #f00;
+}
+
+.blue {
+    background-color: #005a9c;
+}
+
+.green {
+    background-color: green;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.gold {
+    background-color: gold;
+}
+.cubes {
+    display: flex; 
+    width: 500px;
+    height: 80px;
+}
+
+.trading-text {
+    margin: 0;
+    color: #005a9c;
+    font-size: 36px;
+}
+
+#gameBtn {
+    width: 200px;
+}
+
+.game-buttons {
+    color: #fdfdfd;
+}
