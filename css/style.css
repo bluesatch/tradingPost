@@ -98,3 +98,9 @@ h1 {
 .game-buttons {
     color: #fdfdfd;
 }
+
+.trade-btn {
+    color: #fdfdfd;
+    width: 75px;
+    height: 40px;
+}

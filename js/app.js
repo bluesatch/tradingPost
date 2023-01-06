@@ -1,7 +1,6 @@
 class Game {
     constructor() {
         this.gameBtn = document.getElementById('gameBtn')
-        this.tradeBtn = document.getElementById('tradeBtn')
         this.rollBtn = document.getElementById('rollBtn')
         this.redCubes = document.getElementById('redCubes')
         this.blueCubes = document.getElementById('blueCubes')
@@ -13,17 +12,28 @@ class Game {
 
         this.tradeValue
 
+        /**
+         * this.cubes = {
+         *  red: 0,
+         *  blue: 0,
+         *  green: 0,
+         *  purple: 0,
+         *  gold: 0
+         * }
+         */
+
         this.cubes = {
-            red: 0,
-            blue: 0,
-            green: 0,
-            purple: 0,
-            gold: 0
+            red: [],
+            blue: [],
+            green: [],
+            purple: [],
+            gold: []
         }
     }
 
     init() {
         this.setTradeValue()
+        this.tradeRed()
 
     }
 
@@ -50,7 +60,7 @@ class Game {
                 let roll = Math.ceil(Math.random() * 6)
                 dieRoll.innerText = roll
                 this.buildRedCubes(roll)
-                this.cubes.red+= roll
+                // this.cubes.red+= roll
                 // console.log(this.cubes)
             })
         }
@@ -61,6 +71,7 @@ class Game {
             
             const redCube = document.createElement('div')
             redCube.classList.add('cube', 'red')
+            this.cubes.red.push(redCube)
             this.redCubes.append(redCube)
         }
     }
@@ -71,15 +82,19 @@ class Game {
         
         switch (color) {
             case 'blue': 
+                this.cubes.blue.push(cube)
                 this.blueCubes.append(cube)
                 break
             case 'green':
+                this.cubes.green.push(cube)
                 this.greenCubes.append(cube)
                 break
             case 'purple':
+                this.cubes.purple.push(cube)
                 this.purpleCubes.append(cube)
                 break
             case 'gold':
+                this.cubes.gold.push(cube)
                 this.goldCube.append(cube)
                 break
             default:
@@ -88,15 +103,33 @@ class Game {
     }
 
     tradeCubes(tradeValue, prevColor, nextColor) {
-        const tradeBtn = this.tradeBtn
-
-        tradeBtn.addEventListener('click', ()=> {
-            if (tradeValue >= this.cubes[prevColor]) {
-                this.buildCube(nextColor)
+        console.log(tradeValue, this.cubes[prevColor])
+        if (tradeValue <= this.cubes[prevColor].length) {
+            // this.cubes[prevColor] = this.cubes[prevColor] - tradeValue
+            // this.cubes[nextColor]+= 1
+            // this.buildCube(nextColor)
+            // console.log(this.cubes)
+            console.log(this.cubes[prevColor])
+            for (let i = 0; i < tradeValue; i++) {
+                this.cubes[prevColor][i].addClassList('d-none')
+                this.cubes[prevColor].pop()
             }
+            this.buildCube(nextColor)
+            console.log(this.cubes)
+        }
+    }
 
+    tradeRed() {
+        const redTrade = document.getElementById('redTrade')
+
+        redTrade.addEventListener('click', ()=> {
+            // console.log('click')
+            // console.log(this.cubes.red)
+            this.tradeCubes(this.tradeValue, 'red', 'blue')
+            // for (let i = 0; i < this.tradeValue; i++) {
+
+            // }
         })
-
     }
 
 
