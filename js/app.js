@@ -11,16 +11,7 @@ class Game {
         this.dieRoll = document.getElementById('dieRoll')
 
         this.tradeValue
-
-        /**
-         * this.cubes = {
-         *  red: 0,
-         *  blue: 0,
-         *  green: 0,
-         *  purple: 0,
-         *  gold: 0
-         * }
-         */
+        this.rollCount = 0
 
         this.cubes = {
             red: [],
@@ -34,6 +25,9 @@ class Game {
     init() {
         this.setTradeValue()
         this.tradeRed()
+        this.tradeBlue()
+        this.tradeGreen()
+        this.tradePurple()
 
     }
 
@@ -60,8 +54,8 @@ class Game {
                 let roll = Math.ceil(Math.random() * 6)
                 dieRoll.innerText = roll
                 this.buildRedCubes(roll)
-                // this.cubes.red+= roll
-                // console.log(this.cubes)
+                this.rollCount += roll
+                document.getElementById('rollTally').innerText = this.rollCount
             })
         }
     }
@@ -105,16 +99,6 @@ class Game {
     tradeCubes(tradeValue, prevColor, nextColor) {
         // console.log(tradeValue, this.cubes[prevColor])
         if (tradeValue <= this.cubes[prevColor].length) {
-            // this.cubes[prevColor] = this.cubes[prevColor] - tradeValue
-            // this.cubes[nextColor]+= 1
-            // this.buildCube(nextColor)
-            // console.log(this.cubes)
-            // console.log(this.cubes[prevColor])
-            // for (let i = 0; i < tradeValue; i++) {
-            //     console.log(this.cubes[prevColor][i])
-            //     this.cubes[prevColor][i].classList.add('d-none')
-            //     this.cubes[prevColor].shift()
-            // }
             let cubesToDelete = tradeValue
             while (cubesToDelete > 0) {
                 console.log(cubesToDelete)
@@ -131,15 +115,40 @@ class Game {
         const redTrade = document.getElementById('redTrade')
 
         redTrade.addEventListener('click', ()=> {
-            // console.log('click')
-            // console.log(this.cubes.red)
             this.tradeCubes(this.tradeValue, 'red', 'blue')
-            // for (let i = 0; i < this.tradeValue; i++) {
-
-            // }
         })
     }
 
+    tradeBlue() {
+        const blueTrade = document.getElementById('blueTrade')
+
+        blueTrade.addEventListener('click', ()=> {
+            this.tradeCubes(this.tradeValue, 'blue', 'green')
+        })
+    }
+
+    tradeGreen() {
+        const greenTrade = document.getElementById('greenTrade')
+
+        greenTrade.addEventListener('click', ()=> {
+            this.tradeCubes(this.tradeValue, 'green', 'purple')
+        })
+    }
+
+    tradePurple() {
+        const greenTrade = document.getElementById('purpleTrade')
+
+        purpleTrade.addEventListener('click', ()=> {
+            this.tradeCubes(this.tradeValue, 'purple', 'gold')
+            this.winGame()
+        })
+    }
+
+    winGame() {
+        if (this.cubes.gold.length == 1) {
+            document.getElementById('h1').innerText = 'You Win!'
+        }
+    }
 
 }
 
