@@ -50,10 +50,11 @@ h1 {
 .cube-section {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .cube {
-    margin-right: 20px;
+    margin-right: 10px;
     width: 70px;
     height: 70px;
     box-shadow: 2px 2px 2px #aaa;
@@ -80,7 +81,6 @@ h1 {
 }
 .cubes {
     display: flex; 
-    width: 500px;
     height: 80px;
 }
 

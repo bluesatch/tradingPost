@@ -39,6 +39,7 @@ class Game {
             this.tradeValue = Math.floor(Math.random() * (6 - 2 + 1) + 2)
             this.tradingValue.innerText = this.tradeValue
             gameBtn.classList.add('disabled')
+            gameBtn.innerText = 'Trade Value Set'
 
             this.rollDie()
             
