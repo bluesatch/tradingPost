@@ -103,16 +103,24 @@ class Game {
     }
 
     tradeCubes(tradeValue, prevColor, nextColor) {
-        console.log(tradeValue, this.cubes[prevColor])
+        // console.log(tradeValue, this.cubes[prevColor])
         if (tradeValue <= this.cubes[prevColor].length) {
             // this.cubes[prevColor] = this.cubes[prevColor] - tradeValue
             // this.cubes[nextColor]+= 1
             // this.buildCube(nextColor)
             // console.log(this.cubes)
-            console.log(this.cubes[prevColor])
-            for (let i = 0; i < tradeValue; i++) {
-                this.cubes[prevColor][i].addClassList('d-none')
+            // console.log(this.cubes[prevColor])
+            // for (let i = 0; i < tradeValue; i++) {
+            //     console.log(this.cubes[prevColor][i])
+            //     this.cubes[prevColor][i].classList.add('d-none')
+            //     this.cubes[prevColor].shift()
+            // }
+            let cubesToDelete = tradeValue
+            while (cubesToDelete > 0) {
+                console.log(cubesToDelete)
+                this.cubes[prevColor][this.cubes[prevColor].length - 1].classList.add('d-none')
                 this.cubes[prevColor].pop()
+                cubesToDelete--
             }
             this.buildCube(nextColor)
             console.log(this.cubes)
