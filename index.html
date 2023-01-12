@@ -11,7 +11,17 @@
 <body>
     <header class="header" id="header">
         <div class="container">
-            <h1 class="text-center text-uppercase" id="h1">trading post</h1>
+            <div class="row">
+                <h1 class="text-center text-uppercase" id="h1">trading post</h1>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <p class="scores">Best score: <span id="bestScore"></span></p>
+                </div>
+                <div class="col-6">
+                    <p class="scores">Best avg: <span id="bestAvg"></span></p>
+                </div>
+            </div>
         </div>
     </header>
     <main class="main" id="main">
@@ -55,6 +65,9 @@
                     <section class="section buttonSection">
                         <button class="btn btn-lg green text-capitalize game-buttons" id="rollBtn">roll</button>
                         <p class="text-capitalize roll-tally">roll count: <span id="rollTally"></span></p>
+                        <!-- <p class="text-capitalize need-to-win">need to win: <span id="needToWin"></span></p> -->
+                        <p class="text-capitalize total-rolls">total rolls:
+                        <span id="totalRolls"></span></p>
                     </section>
                 </div>
             </div>

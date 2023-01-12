@@ -16,6 +16,11 @@ h1 {
     color: #fdfdfd;
 }
 
+.scores {
+    color: #fdfdfd;
+    font-size: 28px;
+}
+
 #gameSection {
     margin: 20px auto;
     padding: 10px;
@@ -90,7 +95,7 @@ h1 {
     font-size: 36px;
 }
 
-.roll-tally {
+.roll-tally, .need-to-win, .total-rolls {
     color: green;
     font-size: 36px;
 }

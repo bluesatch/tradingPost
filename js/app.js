@@ -12,6 +12,7 @@ class Game {
 
         this.tradeValue
         this.rollCount = 0
+        this.totalRolls = 0
 
         this.cubes = {
             red: [],
@@ -20,6 +21,34 @@ class Game {
             purple: [],
             gold: []
         }
+
+        this.bestScores = [
+            {
+                tradeValue: 2,
+                score: 0,
+                avg: 0
+            },
+            {
+                tradeValue: 3,
+                score: 0,
+                avg: 0
+            },
+            {
+                tradeValue: 4,
+                score: 0,
+                avg: 0
+            },
+            {
+                tradeValue: 5,
+                score: 0,
+                avg: 0
+            },
+            {
+                tradeValue: 6,
+                score: 0,
+                avg: 0
+            }
+        ]
     }
 
     init() {
@@ -28,6 +57,9 @@ class Game {
         this.tradeBlue()
         this.tradeGreen()
         this.tradePurple()
+        // this.handleTradeBtns()
+
+        // this.getScores()
 
     }
 
@@ -40,6 +72,7 @@ class Game {
             this.tradingValue.innerText = this.tradeValue
             gameBtn.classList.add('disabled')
             gameBtn.innerText = 'Trade Value Set'
+            // document.getElementById('needToWin').innerText = this.tradeValue ** 4
 
             this.rollDie()
             
@@ -56,7 +89,10 @@ class Game {
                 dieRoll.innerText = roll
                 this.buildRedCubes(roll)
                 this.rollCount += roll
+                this.totalRolls++
                 document.getElementById('rollTally').innerText = this.rollCount
+
+                document.getElementById('totalRolls').innerText = this.totalRolls
             })
         }
     }
@@ -102,13 +138,13 @@ class Game {
         if (tradeValue <= this.cubes[prevColor].length) {
             let cubesToDelete = tradeValue
             while (cubesToDelete > 0) {
-                console.log(cubesToDelete)
+                // console.log(cubesToDelete)
                 this.cubes[prevColor][this.cubes[prevColor].length - 1].classList.add('d-none')
                 this.cubes[prevColor].pop()
                 cubesToDelete--
             }
             this.buildCube(nextColor)
-            console.log(this.cubes)
+            // console.log(this.cubes)
         }
     }
 
@@ -145,10 +181,59 @@ class Game {
         })
     }
 
+    // handleTradeBtns() {
+    //     const tradeBtns = document.querySelectorAll('.trade-btn')
+
+    //     console.log(tradeBtns)
+
+    //     tradeBtns.forEach(button => {
+    //         button.addEventListener('click', ()=> {
+    //             console.log('click')
+    //             let prev;
+
+    //             switch (prev) {
+    //                 case 'red':
+    //                     this.tradeCubes(this.tradeValue, prev, 'blue')
+    //                     break
+    //                 case 'blue': 
+    //                     this.tradeCubes(this.tradeValue, 'blue', 'green')
+    //                     break 
+    //                 case 'green':
+    //                     this.tradeCubes(this.tradeValue, 'green', 'purple')
+    //                     break
+    //                 case 'purple':
+    //                     this.tradeCubes(this.tradeValue, 'purple', 'gold')
+    //                     this.winGame()
+    //                     break
+    //                 default: 
+    //                     console.log('clicked')
+    //                     break
+    //             }
+    //         })
+    //     })
+    // }
+
     winGame() {
         if (this.cubes.gold.length == 1) {
             document.getElementById('h1').innerText = 'You Win!'
         }
+
+        // let score = this.totalRolls 
+        this.getScores(this.tradeValue, this.totalRolls)
+
+    }
+
+    getScores(value, rolls) {
+        
+        this.bestScores.forEach(obj => {
+            // console.log(obj.tradeValue)
+            if (obj.tradeValue == value) {
+                obj.score = rolls
+                obj.avg = this.rollCount / this.totalRolls
+                console.log(obj)
+
+            }
+        })
     }
 
 }
