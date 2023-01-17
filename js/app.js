@@ -9,6 +9,10 @@ class Game {
         this.goldCube = document.getElementById('goldCube')
         this.tradingValue = document.getElementById('tradingValue')
         this.dieRoll = document.getElementById('dieRoll')
+        this.bestScore = document.getElementById('bestScore')
+        this.bestAvg = document.getElementById('bestAvg')
+        this.gameRestart = document.getElementById('gameRestart')
+
 
         this.tradeValue
         this.rollCount = 0
@@ -20,6 +24,12 @@ class Game {
             green: [],
             purple: [],
             gold: []
+        }
+
+        this.currentScore = {
+            tradeValue: this.tradeValue,
+            score: this.totalRolls,
+            avg: this.rollCount / this.totalRolls
         }
 
         this.bestScores = [
@@ -49,6 +59,8 @@ class Game {
                 avg: 0
             }
         ]
+
+        this.hasGameEnded = false
     }
 
     init() {
@@ -73,6 +85,7 @@ class Game {
             gameBtn.classList.add('disabled')
             gameBtn.innerText = 'Trade Value Set'
             // document.getElementById('needToWin').innerText = this.tradeValue ** 4
+            this.currentScore.tradeValue = this.tradeValue
 
             this.rollDie()
             
@@ -90,11 +103,15 @@ class Game {
                 this.buildRedCubes(roll)
                 this.rollCount += roll
                 this.totalRolls++
+                this.currentScore.score = this.rollCount 
+                this.currentScore.avg = this.rollCount / this.totalRolls
+                // console.log(this.currentScore)
                 document.getElementById('rollTally').innerText = this.rollCount
 
-                document.getElementById('totalRolls').innerText = this.totalRolls
+                // document.getElementById('totalRolls').innerText = this.totalRolls
             })
         }
+        return this.currentScore
     }
 
     buildRedCubes(cubes) {
@@ -181,59 +198,54 @@ class Game {
         })
     }
 
-    // handleTradeBtns() {
-    //     const tradeBtns = document.querySelectorAll('.trade-btn')
-
-    //     console.log(tradeBtns)
-
-    //     tradeBtns.forEach(button => {
-    //         button.addEventListener('click', ()=> {
-    //             console.log('click')
-    //             let prev;
-
-    //             switch (prev) {
-    //                 case 'red':
-    //                     this.tradeCubes(this.tradeValue, prev, 'blue')
-    //                     break
-    //                 case 'blue': 
-    //                     this.tradeCubes(this.tradeValue, 'blue', 'green')
-    //                     break 
-    //                 case 'green':
-    //                     this.tradeCubes(this.tradeValue, 'green', 'purple')
-    //                     break
-    //                 case 'purple':
-    //                     this.tradeCubes(this.tradeValue, 'purple', 'gold')
-    //                     this.winGame()
-    //                     break
-    //                 default: 
-    //                     console.log('clicked')
-    //                     break
-    //             }
-    //         })
-    //     })
-    // }
-
     winGame() {
         if (this.cubes.gold.length == 1) {
             document.getElementById('h1').innerText = 'You Win!'
         }
 
+        console.log(this.currentScore)
+
         // let score = this.totalRolls 
-        this.getScores(this.tradeValue, this.totalRolls)
+        this.getScores(this.currentScore)
+
+        this.hasGameEnded = true
 
     }
 
-    getScores(value, rolls) {
-        
-        this.bestScores.forEach(obj => {
-            // console.log(obj.tradeValue)
-            if (obj.tradeValue == value) {
-                obj.score = rolls
-                obj.avg = this.rollCount / this.totalRolls
-                console.log(obj)
+    getScores(obj) {
 
+        this.bestScores.forEach(object => {
+            if(obj.tradeValue === object.tradeValue) {
+                // console.log(object.tradeValue)
+                // console.log(object)
+                if (object.score == 0) {
+                    object.score = obj.score
+                } else if (object.score > obj.score) {
+                    object.score = obj.score
+                } else {
+                    return object
+                }
+
+                if (object.avg == 0) {
+                    object.avg = obj.avg
+                } else if (object.avg > obj.avg) {
+                    object.avg = obj.avg
+                } else {
+                    return object
+                }
+                console.log(object)
+
+                this.bestScore.innerText = object.score
+                this.bestAvg.innerText = object.avg.toFixed(2)
             }
+            
         })
+    }
+
+    restartGame() {
+        if (this.hasGameEnded) {
+            this.gameRestart.classList.remove('disabled')
+        }
     }
 
 }

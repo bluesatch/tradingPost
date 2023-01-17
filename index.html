@@ -15,10 +15,13 @@
                 <h1 class="text-center text-uppercase" id="h1">trading post</h1>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-4">
+                    <p class="scores">Trading value: <span id="tradingValue"></span></p>
+                </div>
+                <div class="col-4">
                     <p class="scores">Best score: <span id="bestScore"></span></p>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <p class="scores">Best avg: <span id="bestAvg"></span></p>
                 </div>
             </div>
@@ -57,7 +60,7 @@
                 <div class="col-6">
                     <section class="section textSection">
                         <button class="btn btn-lg blue text-capitalize game-buttons" data-bs-toggle="button" aria-pressed="true" id="gameBtn">set trade value</button>
-                        <p class="trading-text text-capitalize">trading value: <span id="tradingValue"></span></p>
+                        
                         <p class="trading-text text-capitalize">roll: <span id="dieRoll"></span></p>
                     </section>
                 </div>
@@ -66,8 +69,9 @@
                         <button class="btn btn-lg green text-capitalize game-buttons" id="rollBtn">roll</button>
                         <p class="text-capitalize roll-tally">roll count: <span id="rollTally"></span></p>
                         <!-- <p class="text-capitalize need-to-win">need to win: <span id="needToWin"></span></p> -->
-                        <p class="text-capitalize total-rolls">total rolls:
-                        <span id="totalRolls"></span></p>
+                        <!-- <p class="text-capitalize total-rolls">total rolls:
+                        <span id="totalRolls"></span></p> -->
+                        <button class="btn btn-lg green text-capitalize game-buttons disabled" id="gameRestart">restart game</button>
                     </section>
                 </div>
             </div>
