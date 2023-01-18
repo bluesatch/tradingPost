@@ -64,11 +64,16 @@ class Game {
     }
 
     init() {
+
+        this.hasGameEnded = false 
+
         this.setTradeValue()
         this.tradeRed()
         this.tradeBlue()
         this.tradeGreen()
         this.tradePurple()
+
+
         // this.handleTradeBtns()
 
         // this.getScores()
@@ -86,6 +91,7 @@ class Game {
             gameBtn.innerText = 'Trade Value Set'
             // document.getElementById('needToWin').innerText = this.tradeValue ** 4
             this.currentScore.tradeValue = this.tradeValue
+            this.rollCount = 0
 
             this.rollDie()
             
@@ -98,6 +104,7 @@ class Game {
 
         if (this.tradeValue > 0) {
             rollBtn.addEventListener('click', ()=> {
+                console.log(this.rollCount)
                 let roll = Math.ceil(Math.random() * 6)
                 dieRoll.innerText = roll
                 this.buildRedCubes(roll)
@@ -210,6 +217,8 @@ class Game {
 
         this.hasGameEnded = true
 
+        this.restartGame(this.hasGameEnded)
+
     }
 
     getScores(obj) {
@@ -242,9 +251,46 @@ class Game {
         })
     }
 
-    restartGame() {
-        if (this.hasGameEnded) {
+    restartGame(bool) {
+        if (bool) {
             this.gameRestart.classList.remove('disabled')
+            
+            this.gameRestart.addEventListener('click', ()=> {
+                this.gameBtn.classList.remove('disabled')
+                this.gameBtn.innerText = 'Set Trade Value'
+                this.rollCount = 0
+                this.totalRolls = 0 
+                this.currentScore.score = 0
+                this.currentScore.avg = 0
+                this.dieRoll.innerText = this.rollCount
+                document.getElementById('rollTally').innerText = this.totalRolls
+                this.cubes = {
+                    red: [],
+                    blue: [],
+                    green: [],
+                    purple: [],
+                    gold: []
+                }
+                // remove cubes from DOM
+                while (this.redCubes.firstChild) {
+                    this.redCubes.removeChild(this.redCubes.firstChild)
+                }
+                while (this.blueCubes.firstChild) {
+                    this.blueCubes.removeChild(this.blueCubes.firstChild)
+                }
+                while (this.greenCubes.firstChild) {
+                    this.greenCubes.removeChild(this.greenCubes.firstChild)
+                }
+                while (this.purpleCubes.firstChild) {
+                    this.purpleCubes.removeChild(this.purpleCubes.firstChild)
+                }
+                while (this.goldCube.firstChild) {
+                    this.goldCube.removeChild(this.goldCube.firstChild)
+                }
+                
+
+                this.hasGameEnded = false
+            })
         }
     }
 
@@ -252,3 +298,5 @@ class Game {
 
 const action = new Game()
 action.init()
+
+

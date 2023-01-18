@@ -18,7 +18,7 @@ h1 {
 
 .scores {
     color: #fdfdfd;
-    font-size: 28px;
+    font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
 
 #gameSection {
@@ -48,7 +48,7 @@ h1 {
 
 .gold-text {
     color: gold;
-    font-size: 48px;
+    font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
     text-shadow: 2px 2px 2px #000;
 }
 
@@ -92,12 +92,12 @@ h1 {
 .trading-text {
     margin: 0;
     color: #005a9c;
-    font-size: 36px;
+    font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
 
 .roll-tally, .need-to-win, .total-rolls {
     color: green;
-    font-size: 36px;
+    font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
 
 #gameBtn {
